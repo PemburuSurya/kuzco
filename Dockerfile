@@ -1,15 +1,20 @@
 # Gunakan image dasar Ubuntu
 FROM ubuntu:latest
 
+# Install dependensi dasar
+RUN apt-get update && apt-get install -y curl
+
 # Set working directory
 WORKDIR /app
+
+# Buat direktori cache
 RUN mkdir -p /app/cache
 
-# Kembali ke working directory utama
-WORKDIR /app
-
-# Copy file manual seperti sebelumnya
+# Install Kuzco dari skrip resmi
 RUN curl -fsSL https://inference.supply/install.sh | sh
 
-# Jalankan Ollama Bridge dulu, lalu tunggu sampai siap sebelum Kuzco
-CMD kuzco worker start --worker $KUZCO_WORKER --code $KUZCO_CODE --cache-directory-override=/app/cache
+# Tambahkan direktori cargo ke PATH (jika dibutuhkan manual)
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Jalankan Kuzco dengan variabel lingkungan
+CMD ["sh", "-c", "kuzco worker start --worker $KUZCO_WORKER --code $KUZCO_CODE --cache-directory-override=/app/cache"]
