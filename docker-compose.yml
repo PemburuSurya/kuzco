@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  kuzco-main:
+    container_name: kuzco-main
+    build: .
+    networks:
+      - kuzco-network
+    restart: always
+    environment:
+      NODE_ENV: "production"
+      KUZCO_WORKER: "m1ocAG_Sy1M83eeOc2uZ7"
+      KUZCO_CODE: "1eaff1ff-58c7-48ed-990d-bc9e3caa5a4a"
+      CACHE_DIRECTORY: "/app/cache"
+
+networks:
+  kuzco-network:
+    driver: bridge
