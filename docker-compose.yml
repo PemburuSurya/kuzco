@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   kuzco-main:
     container_name: kuzco-main
@@ -8,9 +7,10 @@ services:
     restart: always
     environment:
       NODE_ENV: "production"
-      KUZCO_WORKER: "m1ocAG_Sy1M83eeOc2uZ7"
-      KUZCO_CODE: "1eaff1ff-58c7-48ed-990d-bc9e3caa5a4a"
-      CACHE_DIRECTORY: "/app/cache"
+      KUZCO_WORKER: "8NP0GC_HxrCcV-dIhG7Uu"
+      KUZCO_CODE: "f8d6812a-85a5-4d89-aaeb-1d73d54ade20"
+    volumes:
+      - ./cache:/app/cache  # Tambahkan volume agar cache bisa persist jika diperlukan
 
 networks:
   kuzco-network:
